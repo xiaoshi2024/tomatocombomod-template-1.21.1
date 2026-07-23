@@ -1,0 +1,12 @@
+{
+  "entity.player.sit_on_furniture_with_computer": {
+    "subtitle": "subtitles.tomatocombomod.entity.player.sit_on_furniture_with_computer",
+    "sounds": [
+      {
+        "name": "tomatocombomod:entity/player/sit_on_furniture_with_computer",
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  }
+}

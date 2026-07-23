@@ -1,0 +1,38 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 400,
+  "experience": 2.0,
+  "ingredients": [
+    {
+      "item": "tomatocombomod:tomato_booger"
+    },
+    {
+      "item": "tomatocombomod:tomato_pork"
+    },
+    {
+      "item": "tomatocombomod:tomato_chicken"
+    },
+    {
+      "item": "tomatocombomod:tomato_egg_fry"
+    },
+    {
+      "item": "tomatocombomod:tomato_egg"
+    },
+    {
+      "item": "tomatocombomod:tomato_smash"
+    },
+    {
+      "item": "tomatocombomod:tomato_rice"
+    },
+    {
+      "item": "tomatocombomod:tomato_river_noodle"
+    },
+    {
+      "item": "tomatocombomod:tomato_rice_noodle"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tomatocombomod:final_tomato"
+  }
+}

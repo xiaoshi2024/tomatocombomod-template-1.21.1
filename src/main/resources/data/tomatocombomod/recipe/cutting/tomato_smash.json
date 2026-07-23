@@ -1,0 +1,25 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "tomatocombomod:tomato_smash"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "knife_dig"
+    },
+    {
+      "tag": "farmersdelight:tools/knives"
+    }
+  ]
+}

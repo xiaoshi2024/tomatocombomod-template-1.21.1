@@ -1,0 +1,33 @@
+{
+  "itemGroup.tomatocombomod": "番茄组合",
+
+  "item.tomatocombomod.booger": "鼻屎",
+  "item.tomatocombomod.tomato_booger": "番茄鼻屎",
+  "item.tomatocombomod.tomato_pork": "番茄猪肉",
+  "item.tomatocombomod.tomato_chicken": "番茄鸡肉",
+  "item.tomatocombomod.tomato_egg_fry": "番茄炒蛋",
+  "item.tomatocombomod.tomato_egg": "番茄鸡蛋",
+  "item.tomatocombomod.tomato_smash": "暴揍番茄",
+  "item.tomatocombomod.tomato_rice": "番茄饭",
+  "item.tomatocombomod.tomato_river_noodle": "番茄河粉",
+  "item.tomatocombomod.tomato_rice_noodle": "番茄米粉",
+  "item.tomatocombomod.final_tomato": "最终番茄",
+  "subtitles.tomatocombomod.entity.player.sit_on_furniture_with_computer": "得~得得",
+
+  "key.categories.tomatocombomod": "番茄组合",
+  "key.tomatocombomod.pick_nose": "抠鼻屎",
+  "key.tomatocombomod.activate_skill": "激活技能",
+
+  "effect.tomatocombomod.bleeding": "流血",
+
+  "skill.tomatocombomod.tomato_combo": "番茄连招",
+  "skill.tomatocombomod.tomato_combo.desc": "自动发射番茄，消耗饱食度",
+
+  "message.tomatocombomod.gained_skill": "§a获得技能：番茄连招！",
+  "message.tomatocombomod.skill_activated": "§a番茄连招已激活！",
+  "message.tomatocombomod.skill_deactivated": "§c番茄连招已关闭！",
+  "message.tomatocombomod.hungry_cannot_use": "§c饱食度不足，无法使用技能！",
+  "message.tomatocombomod.no_skills": "§c你没有任何技能！",
+  "message.tomatocombomod.skill_on_cooldown": "§c技能冷却中，剩余 %d 秒",
+  "message.tomatocombomod.ate_tomato": "§6呕...这味道..."
+}

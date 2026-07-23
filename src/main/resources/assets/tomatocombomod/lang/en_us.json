@@ -1,0 +1,33 @@
+{
+  "itemGroup.tomatocombomod": "Tomato Combo",
+
+  "item.tomatocombomod.booger": "Booger",
+  "item.tomatocombomod.tomato_booger": "Tomato Booger",
+  "item.tomatocombomod.tomato_pork": "Tomato Pork",
+  "item.tomatocombomod.tomato_chicken": "Tomato Chicken",
+  "item.tomatocombomod.tomato_egg_fry": "Tomato Egg Fry",
+  "item.tomatocombomod.tomato_egg": "Tomato Egg",
+  "item.tomatocombomod.tomato_smash": "Tomato Smash",
+  "item.tomatocombomod.tomato_rice": "Tomato Rice",
+  "item.tomatocombomod.tomato_river_noodle": "Tomato River Noodle",
+  "item.tomatocombomod.tomato_rice_noodle": "Tomato Rice Noodle",
+  "item.tomatocombomod.final_tomato": "Final Tomato",
+  "subtitles.tomatocombomod.entity.player.sit_on_furniture_with_computer": "De~DeDe",
+
+  "key.categories.tomatocombomod": "Tomato Combo",
+  "key.tomatocombomod.pick_nose": "Pick Nose",
+  "key.tomatocombomod.activate_skill": "Activate Skill",
+
+  "effect.tomatocombomod.bleeding": "Bleeding",
+
+  "skill.tomatocombomod.tomato_combo": "Tomato Combo",
+  "skill.tomatocombomod.tomato_combo.desc": "Automatically throw tomatoes, consumes hunger",
+
+  "message.tomatocombomod.gained_skill": "§aGained skill: Tomato Combo!",
+  "message.tomatocombomod.skill_activated": "§aTomato Combo activated!",
+  "message.tomatocombomod.skill_deactivated": "§cTomato Combo deactivated!",
+  "message.tomatocombomod.hungry_cannot_use": "§cNot enough hunger to use skill!",
+  "message.tomatocombomod.no_skills": "§cYou have no skills!",
+  "message.tomatocombomod.skill_on_cooldown": "§cSkill on cooldown, %d seconds remaining",
+  "message.tomatocombomod.ate_tomato": "§6Ugh... that taste..."
+}
