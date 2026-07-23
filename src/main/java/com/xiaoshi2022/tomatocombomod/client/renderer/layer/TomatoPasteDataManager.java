@@ -28,8 +28,8 @@ public class TomatoPasteDataManager {
     public static void setPlayerHit(Player player, TomatoVariantItem.Variant variant) {
         if (player == null) return;
         playerData.put(player.getUUID(), new TomatoPasteLayer.TomatoPasteData(variant, PASTE_DURATION));
-        TomatoComboMod.LOGGER.info("🍅 Set tomato paste data for player: {}, variant: {}, total players: {}",
-                player.getName().getString(), variant, playerData.size());
+//        TomatoComboMod.LOGGER.info("🍅 Set tomato paste data for player: {}, variant: {}, total players: {}",
+//                player.getName().getString(), variant, playerData.size());
     }
     
     /**

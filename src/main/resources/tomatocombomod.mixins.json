@@ -2,7 +2,9 @@
   "required": true,
   "package": "com.xiaoshi2022.tomatocombomod.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "LivingEntityRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

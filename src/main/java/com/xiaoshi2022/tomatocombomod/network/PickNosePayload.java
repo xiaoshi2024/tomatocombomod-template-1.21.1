@@ -60,7 +60,7 @@ public record PickNosePayload(Action action) implements CustomPacketPayload {
                 case BOOGER -> {
                     ItemStack boogerStack = new ItemStack(ModItems.BOOGER.get(), 1);
                     player.getInventory().add(boogerStack);
-                    TomatoComboMod.LOGGER.info("Server: Player {} received booger", player.getName().getString());
+//                    TomatoComboMod.LOGGER.info("Server: Player {} received booger", player.getName().getString());
                 }
                 case BLEED -> {
                     // ✅ 直接使用 DeferredHolder，它实现了 Holder 接口
@@ -72,7 +72,7 @@ public record PickNosePayload(Action action) implements CustomPacketPayload {
                             true,
                             true
                     ));
-                    TomatoComboMod.LOGGER.info("Server: Player {} started bleeding", player.getName().getString());
+//                    TomatoComboMod.LOGGER.info("Server: Player {} started bleeding", player.getName().getString());
                 }
             }
         });

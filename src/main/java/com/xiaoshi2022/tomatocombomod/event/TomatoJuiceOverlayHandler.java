@@ -26,7 +26,7 @@ public class TomatoJuiceOverlayHandler {
     public static void triggerTomatoJuiceEffect() {
         startTime = System.currentTimeMillis();
         isActive = true;
-        TomatoComboMod.LOGGER.info("🍅 Tomato juice overlay effect triggered!");
+//        TomatoComboMod.LOGGER.info("🍅 Tomato juice overlay effect triggered!");
     }
 
     @SubscribeEvent

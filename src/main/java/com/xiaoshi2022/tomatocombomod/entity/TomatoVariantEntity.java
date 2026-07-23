@@ -20,6 +20,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -44,7 +45,7 @@ public class TomatoVariantEntity extends ThrowableItemProjectile {
     public TomatoVariantEntity(Level level, LivingEntity entity) {
         super(ModEntityTypes.TOMATO_VARIANT.get(), entity, level);
         this.tempVariant = TomatoVariantItem.Variant.TOMATO_BOOGER;
-        TomatoComboMod.LOGGER.info("TomatoVariantEntity created with owner: {}", entity);
+//        TomatoComboMod.LOGGER.info("TomatoVariantEntity created with owner: {}", entity);
     }
 
     public TomatoVariantEntity(Level level, double x, double y, double z) {
@@ -120,6 +121,9 @@ public class TomatoVariantEntity extends ThrowableItemProjectile {
     }
 
     // 在 onHitEntity 方法中修改触发网络包的部分
+// TomatoVariantEntity.java
+
+    // 在 TomatoVariantEntity.java 的 onHitEntity 方法中
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
@@ -131,8 +135,14 @@ public class TomatoVariantEntity extends ThrowableItemProjectile {
 
         playTomatoHitSound();
 
-        if (entity instanceof LivingEntity) {
-            applyVariantEffect((LivingEntity) entity);
+        if (entity instanceof LivingEntity living) {
+            applyVariantEffect(living);
+
+            // ✅ 触发生物番茄糊糊效果
+            if (!(entity instanceof Player) && !this.level().isClientSide) {
+                TomatoHitPayload.broadcastMobHit(living, this.getVariant());
+//                TomatoComboMod.LOGGER.info("Triggered mob tomato paste for: {}", living.getName().getString());
+            }
         }
 
         if (!this.level().isClientSide && entity instanceof ServerPlayer serverPlayer) {
@@ -148,7 +158,7 @@ public class TomatoVariantEntity extends ThrowableItemProjectile {
             // 发送番茄汁覆盖效果
             PacketDistributor.sendToPlayer(player, new TomatoJuicePayload());
 
-            TomatoComboMod.LOGGER.info("Broadcast tomato juice effect for player: {}", player.getName().getString());
+//            TomatoComboMod.LOGGER.info("Broadcast tomato juice effect for player: {}", player.getName().getString());
         } catch (Exception e) {
             TomatoComboMod.LOGGER.error("Failed to send tomato juice effect: {}", e.getMessage(), e);
         }

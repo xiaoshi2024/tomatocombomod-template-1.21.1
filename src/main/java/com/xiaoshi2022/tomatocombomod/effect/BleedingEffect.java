@@ -29,7 +29,7 @@ public class BleedingEffect extends MobEffect {
 
             if (player.tickCount % 10 == 0) {
                 player.hurt(player.damageSources().generic(), 1.0F);
-                TomatoComboMod.LOGGER.info("Player {} is bleeding, taking damage!", player.getName().getString());
+//                TomatoComboMod.LOGGER.info("Player {} is bleeding, taking damage!", player.getName().getString());
             }
         }
         return true;

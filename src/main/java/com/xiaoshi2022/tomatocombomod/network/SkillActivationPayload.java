@@ -45,7 +45,7 @@ public record SkillActivationPayload(String skillId) implements CustomPacketPayl
 
             if (skill != null) {
                 boolean success = manager.activateSkill(context.player(), skill);
-                TomatoComboMod.LOGGER.info("Skill activation: {} success={}", payload.skillId(), success);
+//                TomatoComboMod.LOGGER.info("Skill activation: {} success={}", payload.skillId(), success);
             }
         });
     }

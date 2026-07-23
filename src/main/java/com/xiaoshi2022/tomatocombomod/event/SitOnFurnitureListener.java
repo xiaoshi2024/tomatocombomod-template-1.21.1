@@ -77,13 +77,13 @@ public class SitOnFurnitureListener {
                 if (hasComputerNearby) {
                     double distance = player.distanceToSqr(seatPos.getX() + 0.5, seatPos.getY() + 0.5, seatPos.getZ() + 0.5);
                     if (distance <= DETECTION_RADIUS * DETECTION_RADIUS) {
-                        TomatoComboMod.LOGGER.info("Player sat down with computer nearby!");
+//                        TomatoComboMod.LOGGER.info("Player sat down with computer nearby!");
                         playCustomSound(level, seatPos, player);
                     }
                 }
             } else {
                 // 玩家刚站起来 - 停止音效
-                TomatoComboMod.LOGGER.info("Player stood up, stopping sound");
+//                TomatoComboMod.LOGGER.info("Player stood up, stopping sound");
                 stopCustomSound(player);
             }
         }
@@ -95,7 +95,7 @@ public class SitOnFurnitureListener {
 
             // 如果电脑不再附近，停止音效
             if (!hasComputerNearby) {
-                TomatoComboMod.LOGGER.info("Computer no longer nearby, stopping sound");
+//                TomatoComboMod.LOGGER.info("Computer no longer nearby, stopping sound");
                 stopCustomSound(player);
             }
         }
@@ -170,7 +170,7 @@ public class SitOnFurnitureListener {
                 stopCustomSound(player);
             }
 
-            TomatoComboMod.LOGGER.info("Playing sit sound at position: {}", pos);
+//            TomatoComboMod.LOGGER.info("Playing sit sound at position: {}", pos);
 
             // 创建 SoundInstance - 音量调小到 0.3F
             SoundInstance soundInstance = SimpleSoundInstance.forUI(
@@ -182,7 +182,7 @@ public class SitOnFurnitureListener {
             Minecraft.getInstance().getSoundManager().play(soundInstance);
             ACTIVE_SOUNDS.put(playerKey, soundInstance);
 
-            TomatoComboMod.LOGGER.info("Sound played successfully!");
+//            TomatoComboMod.LOGGER.info("Sound played successfully!");
 
         } catch (Exception e) {
             TomatoComboMod.LOGGER.error("Failed to play sound: {}", e.getMessage(), e);
@@ -205,7 +205,7 @@ public class SitOnFurnitureListener {
             if (soundInstance != null) {
                 // 使用 1.21.1 的 stop 方法
                 Minecraft.getInstance().getSoundManager().stop(soundInstance);
-                TomatoComboMod.LOGGER.info("Sound stopped for player: {}", player.getName().getString());
+//                TomatoComboMod.LOGGER.info("Sound stopped for player: {}", player.getName().getString());
             } else {
                 // 如果没有找到特定的 SoundInstance，尝试停止所有音效
                 // 这会停止该玩家所有音效，慎用

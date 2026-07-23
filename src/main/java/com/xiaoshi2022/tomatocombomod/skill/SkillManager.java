@@ -35,7 +35,7 @@ public class SkillManager {
     public void registerSkill(ITomatoSkill skill) {
         if (!registeredSkills.containsKey(skill.getId())) {
             registeredSkills.put(skill.getId(), skill);
-            TomatoComboMod.LOGGER.info("Registered skill: {}", skill.getId());
+//            TomatoComboMod.LOGGER.info("Registered skill: {}", skill.getId());
         }
     }
     
@@ -79,7 +79,7 @@ public class SkillManager {
         // 服务端保存到持久化存储
         if (player instanceof ServerPlayer serverPlayer) {
             PlayerDataStorage.addSkill(serverPlayer, skillId);
-            TomatoComboMod.LOGGER.info("Player {} granted skill: {}", player.getName().getString(), skillId);
+//            TomatoComboMod.LOGGER.info("Player {} granted skill: {}", player.getName().getString(), skillId);
             
             // 同步到客户端
             SkillSyncPayload syncPayload = new SkillSyncPayload(skillId, true);

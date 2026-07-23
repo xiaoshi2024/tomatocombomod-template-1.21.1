@@ -59,6 +59,6 @@ public class SkillActivationHandler {
         
         // 发送技能激活包到服务端
         PacketDistributor.sendToServer(new SkillActivationPayload(skillToActivate.getId()));
-        TomatoComboMod.LOGGER.info("Sent skill activation: {}", skillToActivate.getId());
+//        TomatoComboMod.LOGGER.info("Sent skill activation: {}", skillToActivate.getId());
     }
 }

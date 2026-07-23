@@ -110,12 +110,12 @@ public class PickNoseHandler {
         if (roll < BOOGER_CHANCE) {
             // 抠出鼻屎
             player.displayClientMessage(Component.literal("§a成功抠出鼻屎！"), true);
-            TomatoComboMod.LOGGER.info("Player {} picked a booger", player.getName().getString());
+//            TomatoComboMod.LOGGER.info("Player {} picked a booger", player.getName().getString());
             PickNosePayload.sendBooger();
         } else if (roll < BOOGER_CHANCE + BLEED_CHANCE) {
             // 抠流血 - 流血效果持续10秒（200 tick）
             player.displayClientMessage(Component.literal("§c抠破鼻子了！仰头止血！"), true);
-            TomatoComboMod.LOGGER.info("Player {} started bleeding", player.getName().getString());
+//            TomatoComboMod.LOGGER.info("Player {} started bleeding", player.getName().getString());
             PickNosePayload.sendBleed();
         } else {
             // 什么都没抠到

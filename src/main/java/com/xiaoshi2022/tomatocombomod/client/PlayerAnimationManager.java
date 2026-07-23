@@ -38,7 +38,7 @@ public class PlayerAnimationManager {
                         }
                 )
         );
-        TomatoComboMod.LOGGER.info("Registered player animation controller for pinch");
+//        TomatoComboMod.LOGGER.info("Registered player animation controller for pinch");
     }
 
     /**

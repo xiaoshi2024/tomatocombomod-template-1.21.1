@@ -87,21 +87,21 @@ public class TomatoVariantItem extends Item implements ProjectileItem {
             return InteractionResultHolder.pass(heldStack);
         }
         
-        // 其他番茄变种：发射
-        TomatoComboMod.LOGGER.info("TomatoVariantItem.use() called - variant: {}, isClientSide: {}", variant, level.isClientSide());
-        TomatoComboMod.LOGGER.info("  heldStack: {}, count: {}", heldStack.getItem(), heldStack.getCount());
-        
+//        // 其他番茄变种：发射
+//        TomatoComboMod.LOGGER.info("TomatoVariantItem.use() called - variant: {}, isClientSide: {}", variant, level.isClientSide());
+//        TomatoComboMod.LOGGER.info("  heldStack: {}, count: {}", heldStack.getItem(), heldStack.getCount());
+//
         // Play throw sound - 使用FarmersDelight的烂番茄投掷音效
         playTomatoThrowSound(level, player);
         
         if (!level.isClientSide) {
-            TomatoComboMod.LOGGER.info("  Server side: creating projectile");
+//            TomatoComboMod.LOGGER.info("  Server side: creating projectile");
             TomatoVariantEntity projectile = new TomatoVariantEntity(level, player);
             projectile.setItem(heldStack);
             projectile.setVariant(variant);
             projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(projectile);
-            TomatoComboMod.LOGGER.info("  Projectile created and added to level");
+//            TomatoComboMod.LOGGER.info("  Projectile created and added to level");
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));
@@ -136,7 +136,7 @@ public class TomatoVariantItem extends Item implements ProjectileItem {
                             net.minecraft.network.chat.Component.translatable("message.tomatocombomod.gained_skill"),
                             true
                     );
-                    TomatoComboMod.LOGGER.info("Player {} gained Tomato Combo skill!", player.getName().getString());
+//                    TomatoComboMod.LOGGER.info("Player {} gained Tomato Combo skill!", player.getName().getString());
                 } else {
                     player.addEffect(new MobEffectInstance(
                             MobEffects.CONFUSION,

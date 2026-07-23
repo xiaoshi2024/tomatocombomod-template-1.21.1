@@ -32,7 +32,7 @@ public record TomatoJuicePayload() implements CustomPacketPayload {
                 Class<?> handlerClass = Class.forName("com.xiaoshi2022.tomatocombomod.event.TomatoJuiceOverlayHandler");
                 java.lang.reflect.Method method = handlerClass.getMethod("triggerTomatoJuiceEffect");
                 method.invoke(null);
-                TomatoComboMod.LOGGER.info("Received tomato juice effect packet");
+//                TomatoComboMod.LOGGER.info("Received tomato juice effect packet");
             } catch (ClassNotFoundException e) {
                 // 服务端环境，忽略
                 TomatoComboMod.LOGGER.debug("Client-only class not found (server-side)");

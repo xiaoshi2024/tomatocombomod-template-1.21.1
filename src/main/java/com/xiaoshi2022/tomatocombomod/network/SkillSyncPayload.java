@@ -38,7 +38,7 @@ public record SkillSyncPayload(String skillId, boolean granted) implements Custo
         context.enqueueWork(() -> {
             if (context.player() != null) {
                 SkillManager.getInstance().handleSkillSync(context.player(), payload.skillId(), payload.granted());
-                TomatoComboMod.LOGGER.info("Synced skill: {} granted={}", payload.skillId(), payload.granted());
+//                TomatoComboMod.LOGGER.info("Synced skill: {} granted={}", payload.skillId(), payload.granted());
             }
         });
     }

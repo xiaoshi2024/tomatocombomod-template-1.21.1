@@ -154,7 +154,7 @@ public class PlayerDataStorage {
         Set<String> skills = getPlayerSkills(player);
         if (skills.add(skillId)) {
             savePlayerSkills(player, skills);
-            TomatoComboMod.LOGGER.info("Added skill {} to player {}", skillId, player.getName().getString());
+//            TomatoComboMod.LOGGER.info("Added skill {} to player {}", skillId, player.getName().getString());
         }
     }
 
@@ -165,7 +165,7 @@ public class PlayerDataStorage {
         Set<String> skills = getPlayerSkills(player);
         if (skills.remove(skillId)) {
             savePlayerSkills(player, skills);
-            TomatoComboMod.LOGGER.info("Removed skill {} from player {}", skillId, player.getName().getString());
+//            TomatoComboMod.LOGGER.info("Removed skill {} from player {}", skillId, player.getName().getString());
         }
     }
 
