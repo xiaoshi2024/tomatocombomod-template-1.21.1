@@ -12,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -27,6 +28,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
+import static vectorwing.farmersdelight.common.registry.ModItems.TOMATO;
+
 @Mod(TomatoComboMod.MODID)
 public class TomatoComboMod {
     public static final String MODID = "tomatocombomod";
@@ -35,24 +38,6 @@ public class TomatoComboMod {
     // 注册器
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    // 创造模式标签页
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.tomatocombomod"))
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModItems.TOMATO_BOOGER.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(ModItems.BOOGER.get());
-                output.accept(ModItems.TOMATO_BOOGER.get());
-                output.accept(ModItems.TOMATO_PORK.get());
-                output.accept(ModItems.TOMATO_CHICKEN.get());
-                output.accept(ModItems.TOMATO_EGG_FRY.get());
-                output.accept(ModItems.TOMATO_EGG.get());
-                output.accept(ModItems.TOMATO_SMASH.get());
-                output.accept(ModItems.TOMATO_RICE.get());
-                output.accept(ModItems.TOMATO_RIVER_NOODLE.get());
-                output.accept(ModItems.TOMATO_RICE_NOODLE.get());
-                output.accept(ModItems.FINAL_TOMATO.get());
-            }).build());
 
     public TomatoComboMod(IEventBus modEventBus, ModContainer modContainer) {
         // 注册物品（使用 ModItems 中的注册器）
@@ -75,6 +60,31 @@ public class TomatoComboMod {
 
         // 注册网络包处理器 - 使用 modEventBus 而不是 container
         modEventBus.addListener(this::registerPayloadHandlers);
+    }
+
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        // 将番茄变种物品添加到食物和饮品标签页
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            event.accept(ModItems.TOMATO_BOOGER.get());
+            event.accept(ModItems.TOMATO_PORK.get());
+            event.accept(ModItems.TOMATO_CHICKEN.get());
+            event.accept(ModItems.TOMATO_EGG_FRY.get());
+            event.accept(ModItems.TOMATO_EGG.get());
+            event.accept(ModItems.TOMATO_SMASH.get());
+            event.accept(ModItems.TOMATO_RICE.get());
+            event.accept(ModItems.TOMATO_RIVER_NOODLE.get());
+            event.accept(ModItems.TOMATO_RICE_NOODLE.get());
+            event.accept(ModItems.FINAL_TOMATO.get());
+
+            // ✅ 也添加到食物标签页
+            try {
+                net.minecraft.world.item.Item tomato = net.minecraft.core.registries.BuiltInRegistries.ITEM
+                        .get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("farmersdelight", "tomato"));
+                if (tomato != null) {
+                    event.accept(tomato);
+                }
+            } catch (Exception ignored) {}
+        }
     }
 
     // 注册网络包处理器
@@ -130,21 +140,34 @@ public class TomatoComboMod {
         LOGGER.info("Tomato Combo Mod - Common Setup");
     }
 
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        // 将番茄变种物品添加到食物和饮品标签页
-        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
-            event.accept(ModItems.TOMATO_BOOGER.get());
-            event.accept(ModItems.TOMATO_PORK.get());
-            event.accept(ModItems.TOMATO_CHICKEN.get());
-            event.accept(ModItems.TOMATO_EGG_FRY.get());
-            event.accept(ModItems.TOMATO_EGG.get());
-            event.accept(ModItems.TOMATO_SMASH.get());
-            event.accept(ModItems.TOMATO_RICE.get());
-            event.accept(ModItems.TOMATO_RIVER_NOODLE.get());
-            event.accept(ModItems.TOMATO_RICE_NOODLE.get());
-            event.accept(ModItems.FINAL_TOMATO.get());
-        }
-    }
+    // 创造模式标签页
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB =
+            CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.tomatocombomod"))
+                    .withTabsBefore(CreativeModeTabs.COMBAT)
+                    .icon(() -> ModItems.TOMATO_BOOGER.get().getDefaultInstance())
+                    .displayItems((parameters, output) -> {
+                        output.accept(ModItems.BOOGER.get());
+                        output.accept(ModItems.TOMATO_BOOGER.get());
+                        output.accept(ModItems.TOMATO_PORK.get());
+                        output.accept(ModItems.TOMATO_CHICKEN.get());
+                        output.accept(ModItems.TOMATO_EGG_FRY.get());
+                        output.accept(ModItems.TOMATO_EGG.get());
+                        output.accept(ModItems.TOMATO_SMASH.get());
+                        output.accept(ModItems.TOMATO_RICE.get());
+                        output.accept(ModItems.TOMATO_RIVER_NOODLE.get());
+                        output.accept(ModItems.TOMATO_RICE_NOODLE.get());
+                        output.accept(ModItems.FINAL_TOMATO.get());
+
+                        // ✅ 添加农夫乐事的番茄到模组创造模式标签页
+                        try {
+                            net.minecraft.world.item.Item tomato = net.minecraft.core.registries.BuiltInRegistries.ITEM
+                                    .get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("farmersdelight", "tomato"));
+                            if (tomato != null) {
+                                output.accept(tomato);
+                            }
+                        } catch (Exception ignored) {}
+                    }).build());
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {

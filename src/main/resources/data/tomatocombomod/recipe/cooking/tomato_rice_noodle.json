@@ -7,6 +7,9 @@
     },
     {
       "tag": "c:crops/rice"
+    },
+    {
+      "tag": "c:crops/wheat"
     }
   ],
   "recipe_book_tab": "meals",

@@ -14,12 +14,18 @@ import java.util.Map;
 import java.util.UUID;
 
 public class TomatoComboSkill implements ITomatoSkill {
-    
+
     public static final String ID = "tomato_combo";
-    
-    private static final int SHOT_INTERVAL = 8;  // 每8tick发射一次
+
+    // 🔥 修改这里：数值越小投掷越快
+    // 原值: 8 tick (约 2.5 发/秒)
+    // 推荐值: 4 tick (约 5 发/秒) - 速度翻倍
+    // 更快: 2 tick (约 10 发/秒)
+    // 极速: 1 tick (约 20 发/秒)
+    private static final int SHOT_INTERVAL = 4;  // 从 8 改为 4，速度翻倍
+
     private static final int HUNGER_COST_INTERVAL = 20;  // 每秒消耗一次饱食度
-    
+
     private final Map<UUID, ComboState> activePlayers = new HashMap<>();
 
     @Override
@@ -62,7 +68,7 @@ public class TomatoComboSkill implements ITomatoSkill {
         if (player.level().isClientSide()) {
             return true;
         }
-        
+
         if (player.getFoodData().getFoodLevel() < 3) {
             player.displayClientMessage(
                     Component.translatable("message.tomatocombomod.hungry_cannot_use"),
@@ -70,15 +76,15 @@ public class TomatoComboSkill implements ITomatoSkill {
             );
             return false;
         }
-        
+
         ComboState state = activePlayers.get(player.getUUID());
         if (state == null) {
             state = new ComboState();
             activePlayers.put(player.getUUID(), state);
         }
-        
+
         state.active = !state.active;
-        
+
         if (state.active) {
             state.shotCounter = 0;
             state.hungerCounter = 0;
@@ -93,7 +99,7 @@ public class TomatoComboSkill implements ITomatoSkill {
                     true
             );
         }
-        
+
         return true;
     }
 
@@ -103,22 +109,22 @@ public class TomatoComboSkill implements ITomatoSkill {
         if (player.level().isClientSide()) {
             return;
         }
-        
+
         ComboState state = activePlayers.get(player.getUUID());
-        
+
         if (state == null || !state.active) {
             return;
         }
-        
+
         state.shotCounter++;
         state.hungerCounter++;
-        
+
         // 持续消耗饱食度
         if (state.hungerCounter >= HUNGER_COST_INTERVAL) {
             state.hungerCounter = 0;
             int currentFood = player.getFoodData().getFoodLevel();
             player.getFoodData().setFoodLevel(Math.max(0, currentFood - 1));
-            
+
             if (player.getFoodData().getFoodLevel() <= 0) {
                 state.active = false;
                 player.displayClientMessage(
@@ -128,22 +134,22 @@ public class TomatoComboSkill implements ITomatoSkill {
                 return;
             }
         }
-        
-        // 每8tick发射一个番茄
+
+        // 每 SHOT_INTERVAL tick 发射一个番茄
         if (state.shotCounter >= SHOT_INTERVAL) {
             state.shotCounter = 0;
-            
+
             // 循环使用9种番茄变种（排除最终番茄）
             TomatoVariantItem.Variant[] variants = TomatoVariantItem.Variant.values();
-            
+
             TomatoVariantItem.Variant variant = variants[state.variantIndex];
-            
+
             TomatoVariantEntity projectile = new TomatoVariantEntity(player.level(), player);
             projectile.setItem(new ItemStack(ModItems.getTomatoVariant(variant)));
             projectile.setVariant(variant);
             projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             player.level().addFreshEntity(projectile);
-            
+
             // 切换到下一个变种（只循环前9种，排除最终番茄）
             state.variantIndex = (state.variantIndex + 1) % (variants.length - 1);
         }
