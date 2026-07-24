@@ -15,8 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.util.UUID;
-
 // ✅ 使用 int entityId 而不是 UUID
 public record TomatoHitPayload(int entityId, int variantId, boolean isPlayer) implements CustomPacketPayload {
 
@@ -68,7 +66,7 @@ public record TomatoHitPayload(int entityId, int variantId, boolean isPlayer) im
 
         TomatoHitPayload payload = new TomatoHitPayload(entity.getId(), variant.ordinal(), false);
         PacketDistributor.sendToPlayersTrackingEntity(entity, payload);
-        TomatoComboMod.LOGGER.info("Broadcast mob tomato hit: {}", entity.getName().getString());
+//        TomatoComboMod.LOGGER.info("Broadcast mob tomato hit: {}", entity.getName().getString());
     }
 
     public static void handleClient(TomatoHitPayload payload, IPayloadContext context) {

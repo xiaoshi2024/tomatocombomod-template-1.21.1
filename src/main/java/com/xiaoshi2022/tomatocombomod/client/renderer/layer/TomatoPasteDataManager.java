@@ -1,13 +1,11 @@
 package com.xiaoshi2022.tomatocombomod.client.renderer.layer;
 
-import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import com.xiaoshi2022.tomatocombomod.item.TomatoVariantItem;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.UUID;

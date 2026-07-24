@@ -3,7 +3,6 @@ package com.xiaoshi2022.tomatocombomod.skill;
 import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import com.xiaoshi2022.tomatocombomod.entity.TomatoVariantEntity;
 import com.xiaoshi2022.tomatocombomod.item.TomatoVariantItem;
-import com.xiaoshi2022.tomatocombomod.registry.ModEntityTypes;
 import com.xiaoshi2022.tomatocombomod.registry.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

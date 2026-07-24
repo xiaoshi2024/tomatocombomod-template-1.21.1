@@ -1,40 +1,31 @@
 package com.xiaoshi2022.tomatocombomod;
 
-import com.xiaoshi2022.tomatocombomod.network.CooldownSyncPayload;
-import com.xiaoshi2022.tomatocombomod.network.PickNosePayload;
-import com.xiaoshi2022.tomatocombomod.network.PlayerAnimationSyncPayload;
-import com.xiaoshi2022.tomatocombomod.network.SkillActivationPayload;
-import com.xiaoshi2022.tomatocombomod.network.SkillSyncPayload;
-import com.xiaoshi2022.tomatocombomod.network.TomatoHitPayload;
-import com.xiaoshi2022.tomatocombomod.network.TomatoJuicePayload;
-import com.xiaoshi2022.tomatocombomod.skill.SkillManager;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
+import com.xiaoshi2022.tomatocombomod.event.SitOnFurnitureListener;
+import com.xiaoshi2022.tomatocombomod.network.*;
+import com.xiaoshi2022.tomatocombomod.registry.ModEntityTypes;
+import com.xiaoshi2022.tomatocombomod.registry.ModItems;
+import com.xiaoshi2022.tomatocombomod.registry.ModMobEffects;
+import com.xiaoshi2022.tomatocombomod.registry.ModSounds;
+import com.xiaoshi2022.tomatocombomod.skill.SkillManager;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import com.xiaoshi2022.tomatocombomod.event.SitOnFurnitureListener;
-import com.xiaoshi2022.tomatocombomod.registry.ModEntityTypes;
-import com.xiaoshi2022.tomatocombomod.registry.ModItems;
-import com.xiaoshi2022.tomatocombomod.registry.ModMobEffects;
-import com.xiaoshi2022.tomatocombomod.registry.ModSounds;
+import org.slf4j.Logger;
 
 @Mod(TomatoComboMod.MODID)
 public class TomatoComboMod {

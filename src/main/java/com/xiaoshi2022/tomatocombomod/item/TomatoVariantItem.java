@@ -1,9 +1,9 @@
 package com.xiaoshi2022.tomatocombomod.item;
 
-import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import com.xiaoshi2022.tomatocombomod.entity.TomatoVariantEntity;
 import com.xiaoshi2022.tomatocombomod.registry.ModItems;
 import com.xiaoshi2022.tomatocombomod.registry.ModSounds;
+import com.xiaoshi2022.tomatocombomod.skill.SkillManager;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,12 +19,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-
-import com.xiaoshi2022.tomatocombomod.skill.SkillManager;
 
 import java.util.Arrays;
 import java.util.List;

@@ -10,7 +10,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @EventBusSubscriber(modid = TomatoComboMod.MODID, value = Dist.CLIENT)
@@ -30,13 +33,13 @@ public class MobTomatoPasteDataManager {
             data = new MobTomatoPasteData(variant, PASTE_DURATION);
             data.addTomato(generateRandomOffset(entity));
             mobData.put(uuid, data);
-            TomatoComboMod.LOGGER.info("🍅 First tomato paste on mob: {}", entity.getName().getString());
+//            TomatoComboMod.LOGGER.info("🍅 First tomato paste on mob: {}", entity.getName().getString());
         } else {
             data.ticksRemaining = PASTE_DURATION;
             if (data.getTomatoCount() < MAX_TOMATOES_PER_MOB) {
                 data.addTomato(generateRandomOffset(entity));
-                TomatoComboMod.LOGGER.info("🍅 Added tomato #{} on mob: {}",
-                        data.getTomatoCount(), entity.getName().getString());
+//                TomatoComboMod.LOGGER.info("🍅 Added tomato #{} on mob: {}",
+//                        data.getTomatoCount(), entity.getName().getString());
             }
         }
     }

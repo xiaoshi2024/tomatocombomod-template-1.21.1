@@ -9,12 +9,11 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record PickNosePayload(Action action) implements CustomPacketPayload {
+public record PickNosePayload(int actionId) implements CustomPacketPayload {
     public static final Type<PickNosePayload> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(TomatoComboMod.MODID, "pick_nose")
     );
@@ -23,18 +22,19 @@ public record PickNosePayload(Action action) implements CustomPacketPayload {
             new StreamCodec<FriendlyByteBuf, PickNosePayload>() {
                 @Override
                 public PickNosePayload decode(FriendlyByteBuf buf) {
-                    return new PickNosePayload(buf.readEnum(Action.class));
+                    return new PickNosePayload(buf.readInt());
                 }
 
                 @Override
                 public void encode(FriendlyByteBuf buf, PickNosePayload payload) {
-                    buf.writeEnum(payload.action());
+                    buf.writeInt(payload.actionId());
                 }
             };
 
     public enum Action {
         BOOGER,
-        BLEED
+        BLEED,
+        ANIMATION_ONLY  // ✅ 新增：只播放动画，不产生效果
     }
 
     @Override
@@ -43,11 +43,16 @@ public record PickNosePayload(Action action) implements CustomPacketPayload {
     }
 
     public static void sendBooger() {
-        PacketDistributor.sendToServer(new PickNosePayload(Action.BOOGER));
+        PacketDistributor.sendToServer(new PickNosePayload(Action.BOOGER.ordinal()));
     }
 
     public static void sendBleed() {
-        PacketDistributor.sendToServer(new PickNosePayload(Action.BLEED));
+        PacketDistributor.sendToServer(new PickNosePayload(Action.BLEED.ordinal()));
+    }
+
+    // ✅ 新增：发送仅动画同步
+    public static void sendPickNoseWithAnimation() {
+        PacketDistributor.sendToServer(new PickNosePayload(Action.ANIMATION_ONLY.ordinal()));
     }
 
     public static void handleServer(PickNosePayload payload, IPayloadContext context) {
@@ -56,23 +61,38 @@ public record PickNosePayload(Action action) implements CustomPacketPayload {
                 return;
             }
 
-            switch (payload.action()) {
+            Action action;
+            try {
+                action = Action.values()[payload.actionId()];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                TomatoComboMod.LOGGER.warn("Invalid action id: {}", payload.actionId());
+                return;
+            }
+
+            // ✅ 无论是哪种操作，都广播动画给其他玩家
+            PlayerAnimationSyncPayload.broadcast(player, "pinch");
+
+            switch (action) {
                 case BOOGER -> {
                     ItemStack boogerStack = new ItemStack(ModItems.BOOGER.get(), 1);
                     player.getInventory().add(boogerStack);
-//                    TomatoComboMod.LOGGER.info("Server: Player {} received booger", player.getName().getString());
+                    TomatoComboMod.LOGGER.debug("Server: Player {} received booger", player.getName().getString());
                 }
                 case BLEED -> {
-                    // ✅ 直接使用 DeferredHolder，它实现了 Holder 接口
+                    // ✅ DeferredHolder 实现了 Holder 接口，可以直接使用
                     player.addEffect(new MobEffectInstance(
-                            ModMobEffects.BLEEDING,  // DeferredHolder<MobEffect> 本身就是 Holder<MobEffect>
-                            120, // 6秒 = 120 tick
+                            ModMobEffects.BLEEDING,  // DeferredHolder 本身就是 Holder
+                            120,
                             0,
                             false,
                             true,
                             true
                     ));
-//                    TomatoComboMod.LOGGER.info("Server: Player {} started bleeding", player.getName().getString());
+                    TomatoComboMod.LOGGER.debug("Server: Player {} started bleeding", player.getName().getString());
+                }
+                case ANIMATION_ONLY -> {
+                    // 只播放动画，不做其他事情
+                    TomatoComboMod.LOGGER.debug("Server: Player {} played animation only", player.getName().getString());
                 }
             }
         });

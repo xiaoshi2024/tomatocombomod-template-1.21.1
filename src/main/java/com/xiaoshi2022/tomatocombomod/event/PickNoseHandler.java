@@ -17,22 +17,14 @@ import java.util.Random;
 @EventBusSubscriber(modid = TomatoComboMod.MODID, value = Dist.CLIENT)
 public class PickNoseHandler {
 
-    // 抠出鼻屎的概率（30%）
     private static final double BOOGER_CHANCE = 0.3;
-    // 抠流血的概率（30%）
     private static final double BLEED_CHANCE = 0.3;
-    // 动画长度（1.5秒 = 30 tick）
     private static final int ANIMATION_DURATION = 30;
-    // 冷却时间（动画结束后需要等待的时间，约2秒 = 40 tick）
     private static final int COOLDOWN = 40;
 
-    // 是否正在播放动画
     private static boolean isAnimating = false;
-    // 动画播放计时器
     private static int animationTimer = 0;
-    // 按键冷却
     private static int cooldown = 0;
-    // 是否已触发效果（防止重复触发）
     private static boolean effectTriggered = false;
 
     @SubscribeEvent
@@ -46,15 +38,12 @@ public class PickNoseHandler {
         if (isAnimating) {
             animationTimer++;
 
-            // ✅ 动画播放完毕时触发效果
             if (animationTimer >= ANIMATION_DURATION) {
-                // 动画播放完毕，触发效果
                 if (!effectTriggered) {
                     triggerPickNose(mc.player);
                     effectTriggered = true;
                 }
 
-                // 进入冷却
                 isAnimating = false;
                 animationTimer = 0;
                 cooldown = COOLDOWN;
@@ -65,26 +54,30 @@ public class PickNoseHandler {
                         true
                 );
             }
-            // 动画播放期间不处理任何按键
             return;
         }
 
-        // 处理冷却
         if (cooldown > 0) {
             cooldown--;
-            // 冷却期间不处理任何按键
             return;
         }
 
-        // 只有不在动画播放 && 不在冷却时，才检测按键
         if (ModKeyBindings.PICK_NOSE.consumeClick()) {
-            // 播放抠鼻动画
+            // ✅ 播放本地动画
             playPinchAnimation(mc.player);
+
+            // ✅ 发送动画同步包给其他玩家（只有服务端能发送，所以需要发送到服务端转发）
+            // 注意：这里需要发送到服务端，然后由服务端广播给其他玩家
+            // 但我们不能直接从客户端发送 PlayerAnimationSyncPayload 给其他客户端
+            // 所以需要先发送到服务端，再由服务端广播
+
+            // 发送抠鼻屎动作到服务端（包含动画同步）
+            PickNosePayload.sendPickNoseWithAnimation();
+
             isAnimating = true;
             animationTimer = 0;
             effectTriggered = false;
 
-            // 显示提示
             mc.player.displayClientMessage(
                     Component.literal("§e抠鼻屎中..."),
                     true
@@ -92,33 +85,22 @@ public class PickNoseHandler {
         }
     }
 
-    /**
-     * 播放抠鼻屎动画
-     */
     private static void playPinchAnimation(Player player) {
         PlayerAnimationManager.playAnimation(player, "pinch");
         TomatoComboMod.LOGGER.debug("🎬 Playing pinch animation for: {}", player.getName().getString());
     }
 
-    /**
-     * 触发抠鼻屎动作 - 随机结果（在动画播放完毕时调用）
-     */
     private static void triggerPickNose(Player player) {
         Random random = new Random();
         double roll = random.nextDouble();
 
         if (roll < BOOGER_CHANCE) {
-            // 抠出鼻屎
             player.displayClientMessage(Component.literal("§a成功抠出鼻屎！"), true);
-//            TomatoComboMod.LOGGER.info("Player {} picked a booger", player.getName().getString());
             PickNosePayload.sendBooger();
         } else if (roll < BOOGER_CHANCE + BLEED_CHANCE) {
-            // 抠流血 - 流血效果持续10秒（200 tick）
             player.displayClientMessage(Component.literal("§c抠破鼻子了！仰头止血！"), true);
-//            TomatoComboMod.LOGGER.info("Player {} started bleeding", player.getName().getString());
             PickNosePayload.sendBleed();
         } else {
-            // 什么都没抠到
             player.displayClientMessage(Component.literal("§7什么都没抠到..."), true);
         }
     }

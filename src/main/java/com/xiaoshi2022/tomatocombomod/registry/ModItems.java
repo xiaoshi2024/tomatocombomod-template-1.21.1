@@ -3,8 +3,6 @@ package com.xiaoshi2022.tomatocombomod.registry;
 import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import com.xiaoshi2022.tomatocombomod.item.TomatoVariantItem;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;

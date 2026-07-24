@@ -2,11 +2,11 @@ package com.xiaoshi2022.tomatocombomod.entity;
 
 import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import com.xiaoshi2022.tomatocombomod.item.TomatoVariantItem;
+import com.xiaoshi2022.tomatocombomod.network.TomatoHitPayload;
+import com.xiaoshi2022.tomatocombomod.network.TomatoJuicePayload;
 import com.xiaoshi2022.tomatocombomod.registry.ModEntityTypes;
 import com.xiaoshi2022.tomatocombomod.registry.ModItems;
 import com.xiaoshi2022.tomatocombomod.registry.ModSounds;
-import com.xiaoshi2022.tomatocombomod.network.TomatoHitPayload;
-import com.xiaoshi2022.tomatocombomod.network.TomatoJuicePayload;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;

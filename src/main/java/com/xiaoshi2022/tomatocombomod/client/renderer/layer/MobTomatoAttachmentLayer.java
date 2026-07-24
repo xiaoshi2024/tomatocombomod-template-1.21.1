@@ -7,7 +7,6 @@ import com.mojang.math.Axis;
 import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import com.xiaoshi2022.tomatocombomod.client.model.RottenTomatoModel;
 import com.xiaoshi2022.tomatocombomod.item.TomatoVariantItem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelPart;

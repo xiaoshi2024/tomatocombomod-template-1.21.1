@@ -1,8 +1,7 @@
 package com.xiaoshi2022.tomatocombomod.registry;
 
-import com.xiaoshi2022.tomatocombomod.TomatoComboMod;
 import net.minecraft.client.KeyMapping;
-import org.lwjgl.glfw.GLFW;  // ✅ 导入 GLFW
+import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindings {
     public static final String CATEGORY = "key.categories.tomatocombomod";
