@@ -1,15 +1,19 @@
+// TomatoComboModClient.java
 package com.xiaoshi2022.tomatocombomod;
 
 import com.xiaoshi2022.tomatocombomod.client.PlayerAnimationManager;
+import com.xiaoshi2022.tomatocombomod.client.model.RottenTomatoModel;
 import com.xiaoshi2022.tomatocombomod.client.renderer.item.TomatoVariantItemRenderer;
 import com.xiaoshi2022.tomatocombomod.client.renderer.layer.TomatoPasteLayer;
 import com.xiaoshi2022.tomatocombomod.registry.ModEntityTypes;
 import com.xiaoshi2022.tomatocombomod.registry.ModItems;
 import com.xiaoshi2022.tomatocombomod.registry.ModKeyBindings;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -25,6 +29,12 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 @EventBusSubscriber(modid = TomatoComboMod.MODID, value = Dist.CLIENT)
 public class TomatoComboModClient {
 
+    // ✅ 定义 ModelLayerLocation 常量
+    public static final ModelLayerLocation ROTTEN_TOMATO_LAYER = new ModelLayerLocation(
+            ResourceLocation.fromNamespaceAndPath(TomatoComboMod.MODID, "rotten_tomato"),
+            "main"
+    );
+
     public TomatoComboModClient(ModContainer container) {
     }
 
@@ -38,6 +48,15 @@ public class TomatoComboModClient {
 
             PlayerAnimationManager.registerAnimationFactory();
         });
+    }
+
+    // ✅ 修复：使用 ModelLayerLocation
+    @SubscribeEvent
+    static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(
+                ROTTEN_TOMATO_LAYER,  // 使用 ModelLayerLocation
+                RottenTomatoModel::createLayer
+        );
     }
 
     @SubscribeEvent
@@ -75,7 +94,6 @@ public class TomatoComboModClient {
      */
     @SubscribeEvent
     static void onAddLayers(EntityRenderersEvent.AddLayers event) {
-        // PlayerSkin.Model 只有 SLIM 和 WIDE 两个值
         PlayerSkin.Model[] skinModels = {PlayerSkin.Model.SLIM, PlayerSkin.Model.WIDE};
 
         for (PlayerSkin.Model skinModel : skinModels) {
