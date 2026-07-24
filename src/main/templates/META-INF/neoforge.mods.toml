@@ -36,7 +36,7 @@ displayName="${mod_name}" #mandatory
 displayURL="https://space.bilibili.com/1410016591" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="tomato.png" #optional
 
 # A text field displayed in the mod UI
 #credits="" #optional
@@ -46,7 +46,7 @@ authors="xiaoshi2022"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-this is Tomato Combo of xxx?
+this is Tomato Combo of your!
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
